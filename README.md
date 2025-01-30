@@ -30,7 +30,7 @@
 ### Step 3: Configure the Database
 
 1. **Update the database configuration**:
-   - Open the config.py file.
+   - Open the `config.py` file.
    - Update the SQLALCHEMY_DATABASE_URI with your database information in the appropriate configuration class:
      ```
      class ProductionConfig(Config):
@@ -40,7 +40,7 @@
 ### Step 4: Set the Configuration in run.py
 
 1. Set the configuration:
-   - Open the run.py file.
+   - Open the `run.py` file.
    - Ensure the create_app function is called with the correct configuration name:
 
 ```
