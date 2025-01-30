@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from server.db import db
 from server.models.service_ticket import ServiceTicket
 from server.models.mechanic import Mechanic
-from server.service_ticket.schemas import ServiceTicketSchema
+from server.blueprints.service_ticket.schemas import ServiceTicketSchema
 
 service_ticket_bp = Blueprint('service_ticket_bp', __name__)
 service_ticket_schema = ServiceTicketSchema()

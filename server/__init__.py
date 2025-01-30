@@ -2,12 +2,15 @@ from flask import Flask
 from flask_cors import CORS
 from .db import db, ma
 
-def create_app():
+def create_app(config_name=None):
     app = Flask(__name__)
     
-    # Directly configure the Flask application
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost/flask_api_app'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # Load configuration
+    if config_name:
+        app.config.from_object(f'server.config.{config_name}')
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@localhost/flask_api_app'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     CORS(app)  # Enable CORS
 
@@ -21,11 +24,8 @@ def create_app():
 
     ma.init_app(app)  # Initialize Marshmallow with the app
 
-    from .mechanic.routes import mechanic_bp
-    from .service_ticket.routes import service_ticket_bp
-
-    app.register_blueprint(mechanic_bp, url_prefix='/mechanics')
-    app.register_blueprint(service_ticket_bp, url_prefix='/service-tickets')
+    from .blueprints import register_blueprints
+    register_blueprints(app)
 
     with app.app_context():
         db.create_all()  # Create tables if they don't exist

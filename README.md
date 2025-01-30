@@ -6,7 +6,7 @@
 
 1. **Create a virtual environment**:
 
-   ```
+   ```sh
    python -m venv venv
    ```
 

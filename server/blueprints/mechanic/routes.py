@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from server.db import db
 from server.models.mechanic import Mechanic
-from server.mechanic.schemas import MechanicSchema
+from server.blueprints.mechanic.schemas import MechanicSchema
 
-mechanic_bp = Blueprint('mechanic_bp', __name__)
+mechanic_bp = Blueprint('mechanic', __name__)
 mechanic_schema = MechanicSchema()
 mechanics_schema = MechanicSchema(many=True)
 
