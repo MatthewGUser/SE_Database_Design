@@ -6,7 +6,7 @@
 
 1. **Create a virtual environment**:
 
-   ```sh
+   ```
    python -m venv venv
    ```
 
@@ -30,13 +30,24 @@
 ### Step 3: Configure the Database
 
 1. **Update the database configuration**:
-   - Open the `server/__init__.py` file.
-   - Update the `SQLALCHEMY_DATABASE_URI` with your database information:
+   - Open the config.py file.
+   - Update the SQLALCHEMY_DATABASE_URI with your database information in the appropriate configuration class:
      ```
-     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://<DB_USER>:<DB_PASSWORD>@<DB_HOST>/<DB_NAME>'
+     class ProductionConfig(Config):
+      SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://<DB_USER>:<DB_PASSWORD>@<DB_HOST>/<DB_NAME>'
      ```
 
-### Step 4: Run the Server
+### Step 4: Set the Configuration in run.py
+
+1. Set the configuration:
+   - Open the run.py file.
+   - Ensure the create_app function is called with the correct configuration name:
+
+```
+app = create_app('ProductionConfig')
+```
+
+### Step 5: Run the Server
 
 1. **Run the server**:
 
@@ -48,7 +59,7 @@
    - The server will be running at `http://localhost:5000`.
    - Use tools like Postman to test the API endpoints.
 
-### Step 5: Import Postman Collection
+### Step 6: Import Postman Collection
 
 1. **Import the provided Postman collection**:
    - A JSON file is provided in the root directory which is the export for the collection.
